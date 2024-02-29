@@ -1,0 +1,3 @@
+recursive-include src/streamlit_cld_media_library/frontend *
+include README.md
+include LICENSE

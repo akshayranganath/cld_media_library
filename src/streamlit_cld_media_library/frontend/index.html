@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cld-media-library</title>
+    <script src="./streamlit-component-lib.js"></script>
+    <script src="./main.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://media-library.cloudinary.com/global/all.js"></script>
+    <script>
+      
+      window.addEventListener("load", (event) => {
+        //first set the width and height of the div
+        const mldiv = document.getElementById('widget_container')
+    mldiv.setAttribute('style', 'width: ' + window.screen.width + 'px');
+    mldiv.setAttribute('style', 'height: ' + window.screen.height + 'px');
+        console.log(JSON.stringify(args))
+    const mlwidget = cloudinary.createMediaLibrary(
+      {
+        cloud_name: args.cloudName,
+        api_key: args.apiKey,
+        remove_header: args.removeHeader,
+        max_files: args.maxFiles,
+        insert_caption: args.insertCaption || "Insert",
+        inline_container: "#widget_container",
+        default_transformations: [[]],
+        button_class: "myBtn",
+        button_caption: args.buttonCaption ,
+      },
+      {
+        insertHandler: function (data) {                    
+          sendValue(data)
+          //hide the widget
+          mlwidget.hide()
+        },
+      },
+      document.getElementById("open-btn")
+    );
+    
+      });
+
+
+    </script>
+  </head>
+  <body>
+    <button id="open-btn"></button>
+    <div id="widget_container" ></div>
+  </body>
+</html>
